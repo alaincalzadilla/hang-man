@@ -61,12 +61,17 @@ class Word extends React.Component {
 
   render() {
     const letters = (this.state.words.length)?this.state.words[this.props.number]:'';
-    const ocurrence=this.IsTheLetterHere('b', letters);
+    console.log(this.props.keyClicked + '  ' + letters)
+    const ocurrence=this.IsTheLetterHere(this.props.keyClicked, letters);
     let renderedLetter;
     return (
       <WordComponent>
         {letters.split('').map((letter, idx) => {
-           renderedLetter = (~ocurrence.indexOf(idx))?renderedLetter=letter:'';
+           renderedLetter = (~ocurrence.indexOf(idx))?letter:'';
+           console.log(letter)
+           console.log(renderedLetter)
+           console.log(ocurrence)
+
 
             return <StyledUnderscore key={idx}>
                       {renderedLetter}

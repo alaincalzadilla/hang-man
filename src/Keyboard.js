@@ -7,7 +7,13 @@ export default function Keyboard(props){
 
   return(
     <div>
-      {alphabet.map(letter => <Key key={letter} letter={letter}>{letter}</Key>)}
+      {alphabet.map(letter => <Key
+                              key={letter}
+                              letter={letter}
+                              keyClicked={props.keyClicked}
+                              >
+                                {letter}
+                              </Key>)}
     </div>
   );
 }

@@ -18,6 +18,7 @@ class Key extends React.Component {
 
   handleKey(keyPressed) {
     this.setState({used: true});
+    this.props.keyClicked(keyPressed);
   }
 
   render() {
