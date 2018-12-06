@@ -11,7 +11,7 @@ class App extends Component {
 
         </header>
         <Keyboard />
-        <Word number={Math.floor((Math.random() * 10))}/>
+        <Word number={Math.floor((Math.random() * 1000))}/>
       </div>
     );
   }

@@ -1,30 +1,46 @@
 import React from 'react';
 import styled from 'styled-components';
 
-const Underscore = styled.div`
+const StyledUnderscore = styled.div`
   border-bottom: 5px solid;
   width: 50px;
 `;
 
-const wordStyle = {
-  margin: 'auto',
-  justifyItems: 'center',
-  display: 'grid',
-  gridAutoFlow: 'column',
-  gridColumnsGap: '10px'
-}
+const WordComponent = styled.div`
+  margin: auto;
+  justify-items: center;
+  display: grid;
+  grid-auto-flow: column;
+  grid-columns-gap: 10px;
+`;
+
+
 
 class Word extends React.Component {
   constructor (props) {
     super(props);
 
     this.state = {
-      words: '',
-      letters: ['c','d', 'c']
+      words: []
     }
+
+    this.IsTheLetterHere = this.IsTheLetterHere.bind(this);
+  }
+
+  IsTheLetterHere(letter, word) {
+    let indices = [];
+    let idx = word.indexOf(letter);
+
+    while (idx !== -1){
+      indices.push(idx);
+      idx = word.indexOf(letter, idx + 1);
+    }
+
+    return indices
   }
 
   componentDidMount() {
+    console.log('mounted')
     const endPointUrl = "http://app.linkedin-reach.io/words";
     fetch(endPointUrl, {
       method: "GET"
@@ -35,23 +51,29 @@ class Word extends React.Component {
     })
   }
 
-  componentDidUpdate(prevProps) {
-    (this.props.number !== prevProps.number) &&
-    this.setState(prev => ({
-      letters: prev.words[this.props.number].split('')
-    }))
-  }
+  // shouldComponentUpdate(nextProps, nextState) {
+  //   console.log('should')
+  //    if (this.state !== nextState) return true;
+  //
+  //   return this.IsTheLetterHere('b', this.state.words[this.props.number]).length
+  // }
+
 
   render() {
-console.log(this.state.letters);
+    const letters = (this.state.words.length)?this.state.words[this.props.number]:'';
+    const ocurrence=this.IsTheLetterHere('b', letters);
+    let renderedLetter;
     return (
-      <div style={wordStyle}>
-        {this.state.letters.map((letter, idx) =>
-            <Underscore key={idx} className='letter'>
-              {letter}
-            </Underscore>
+      <WordComponent>
+        {letters.split('').map((letter, idx) => {
+           renderedLetter = (~ocurrence.indexOf(idx))?renderedLetter=letter:'';
+
+            return <StyledUnderscore key={idx}>
+                      {renderedLetter}
+                  </StyledUnderscore>
+          }
         )}
-      </div>
+      </WordComponent>
     );
   }
 }
