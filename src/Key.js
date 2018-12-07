@@ -2,9 +2,22 @@ import React from 'react';
 import styled from 'styled-components';
 
 const Keybutton = styled.button`
-  width: 30px;
-  height: 30px;
-  border: 3px solid;
+  width: 60px;
+  height: 60px;
+  border: 3px solid #000;
+  border-radius: 8px;
+  box-shadow: 0 9px #666;
+  font-size: 20px;
+  font-weight: bold;
+
+  :hover {
+    background-color: #fff;
+  }
+
+  :active {
+	  box-shadow: 0 5px #666;
+	  transform: translateY(4px);
+	}
 `;
 
 class Key extends React.Component {

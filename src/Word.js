@@ -4,10 +4,12 @@ import Underscore from './Underscore.js';
 
 const StyledWordDiv = styled.div`
   margin: auto;
+  grid-column: 1/-1;
+  grid-row: 2/3;
   justify-items: center;
   display: grid;
   grid-auto-flow: column;
-  grid-columns-gap: 10px;
+  grid-column-gap: 20px;
 `;
 
 class Word extends React.Component {

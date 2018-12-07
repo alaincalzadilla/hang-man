@@ -3,7 +3,7 @@ import styled from 'styled-components';
 
 const StyledUnderscore = styled.div`
   border-bottom: 5px solid;
-  width: 50px;
+  width: 70px;
 `;
 
 class Underscore extends React.Component {

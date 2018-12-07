@@ -1,6 +1,28 @@
 import React, { Component } from 'react';
 import Word from './Word.js';
-import Keyboard from './Keyboard.js'
+import Keyboard from './Keyboard.js';
+import FailList from './FailsList.js';
+import styled from 'styled-components';
+
+const StyledApp = styled.div`
+  display: grid;
+  grid-template-rows: 100px 1fr 3fr 3fr;
+  grid-template-columns: 3fr 1fr;
+  grid-row-gap: 40px;
+  max-width: 960px;
+  margin: auto;
+  height: 100vh;
+`;
+
+const StyledHeader = styled.header`
+  margin: auto;
+  grid-column: 1/-1;
+  display: flex;
+  justify-content: center;
+  h1 {
+    text-transform: uppercase;
+  }
+`;
 
 class App extends Component {
   constructor(props) {
@@ -10,7 +32,8 @@ class App extends Component {
       keyClicked: '',
       youWon: false,
       youLose: false,
-      guesses: 0
+      guesses: 0,
+      failList: []
     }
 
     this.maxAmountOfGuesses = 6;
@@ -25,12 +48,13 @@ class App extends Component {
   }
 
   incrementGuesses(){
-    if(this.state.guesses+1 === this.maxAmountOfGuesses) {
+    if(this.state.guesses+1 === this.maxAmountOfGuesses)
       this.setState({youLose: true})
-    } else
-        this.setState(prev => ({
-          guesses: ++prev.guesses
-        }))
+
+      this.setState(prev => ({
+        guesses: ++prev.guesses,
+        failList: prev.failList.concat(this.state.keyClicked)
+      }))
   }
 
   youWon() {
@@ -39,20 +63,25 @@ class App extends Component {
 
   render() {
     return (
-      <div className="App">
-        <header className="App-header">
+      <StyledApp className="App">
+        <StyledHeader>
+          <h1>hang man</h1>
+        </StyledHeader>
 
-        </header>
         <Keyboard keyClicked={this.keyClicked}/>
+
         <Word
         keyClicked={this.state.keyClicked}
         youWon={this.youWon}
         incrementGuesses={this.incrementGuesses}
         />
+
+        <FailList failList={this.state.failList} />
+
       {(this.state.youWon) && <h1>you won</h1>}
       {(this.state.youLose) && <h1>you lose</h1>}
 
-      </div>
+    </StyledApp>
     );
   }
 }
