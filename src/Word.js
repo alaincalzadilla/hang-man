@@ -57,6 +57,17 @@ class Word extends React.Component {
     if(nextState.counterOfMatches === this.state.selectedWord.length && this.state.selectedWord.length) this.props.youWon()
   }
 
+  shouldComponentUpdate(nextProps, nextState) {
+    if (this.props.keyClicked !== nextProps.keyClicked
+      && !  this.IsTheLetterHere(nextProps.keyClicked, nextState.selectedWord).length
+    ) {
+        this.props.incrementGuesses()
+        return false;
+      }
+
+    return true;
+  }
+
   componentDidMount() {
 
     const endPointUrl = "http://app.linkedin-reach.io/words?difficulty=1";
