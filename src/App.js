@@ -7,15 +7,23 @@ class App extends Component {
     super(props);
 
     this.state = {
-      keyClicked: ''
+      keyClicked: '',
+      youWon: false
     }
 
     this.keyClicked = this.keyClicked.bind(this);
+    this.youWon = this.youWon.bind(this);
   }
 
   keyClicked(keyClicked) {
     this.setState({keyClicked})
   }
+
+  youWon() {
+    if (!this.state.youWon) this.setState({youWon: true})
+  }
+
+
 
   render() {
     return (
@@ -25,9 +33,10 @@ class App extends Component {
         </header>
         <Keyboard keyClicked={this.keyClicked}/>
         <Word
-        number={5}
         keyClicked={this.state.keyClicked}
+        youWon={this.youWon}
         />
+      {(this.state.youWon) && <h1>you won</h1>}
       </div>
     );
   }
