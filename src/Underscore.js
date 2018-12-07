@@ -17,11 +17,8 @@ class Underscore extends React.Component {
 
 // makes sure once a letter is discovered it remains uncovered
   componentWillUpdate(nextProps, nextState) {
-    console.log(nextProps)
-    console.log(this.props)
 
-    console.log(nextProps.show)
-    if (this.props !== nextProps && nextProps.show) {
+    if (this.props.show !== nextProps.show && nextProps.show) {
       console.log('will')
 
       this.props.incrementCounterOnMatch();

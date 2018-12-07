@@ -16,18 +16,20 @@ class Word extends React.Component {
 
     this.state = {
       words: [],
-      selectedWord: ''
+      selectedWord: '',
+      counterOfMatches: 0
     }
 
     this.IsTheLetterHere = this.IsTheLetterHere.bind(this);
     this.SelectWord = this.SelectWord.bind(this);
+    this.incrementCounterOnMatch = this.incrementCounterOnMatch.bind(this);
   }
 // this function is called everytime we need to generate a new word
   SelectWord() {
     //generates a random index to pull a word from the words array
     const randomNumber = Math.floor(Math.random() * (this.state.words.length + 1));
     this.setState(prev => ({
-      selectedWord: prev.words[randomNumber]
+      selectedWord: prev.words[randomNumber],
     }))
   }
 
@@ -44,19 +46,21 @@ class Word extends React.Component {
     return indices
   }
 
-// closure to increment counter at every match, when counter reach
-// length of selected word means the word has been uncovered
-  incrementCounterOnMatch = (() => {
-    let counter = 0;
-    return () => {
-      if (counter + 1 < this.state.selectedWord.length){
-        console.log('counter  ' + counter)
-        counter++;
-      } else this.props.youWon()
-    }})()
+  incrementCounterOnMatch() {
+    this.setState(prev => ({
+        counterOfMatches: ++prev.counterOfMatches
+      })
+    )
+  }
+
+  componentWillUpdate(nextProps, nextState){
+    if(nextState.counterOfMatches === this.state.selectedWord.length && this.state.selectedWord.length) this.props.youWon()
+  }
 
   componentDidMount() {
+
     const endPointUrl = "http://app.linkedin-reach.io/words?difficulty=1";
+
     fetch(endPointUrl, {
       method: "GET"
     })

@@ -8,7 +8,8 @@ class App extends Component {
 
     this.state = {
       keyClicked: '',
-      youWon: false
+      youWon: false,
+      youLose: false
     }
 
     this.keyClicked = this.keyClicked.bind(this);
@@ -22,8 +23,6 @@ class App extends Component {
   youWon() {
     if (!this.state.youWon) this.setState({youWon: true})
   }
-
-
 
   render() {
     return (
