@@ -102,7 +102,8 @@ class Word extends React.Component {
     const keyClicked = this.props.keyClicked;
     const ocurrence=this.IsTheLetterHere((keyClicked?keyClicked:' '), this.state.selectedWord);
 console.log(this.state.selectedWord)
-    return (
+    return (this.state.selectedWord)?
+      (
         <StyledWordDiv>
           {this.state.selectedWord.split('').map((letter, idx) => {
               return <Underscore
@@ -115,7 +116,11 @@ console.log(this.state.selectedWord)
             }
           )}
         </StyledWordDiv>
-    );
+    ):
+    (<StyledWordDiv>
+      <h3>Searching the Dictionary...</h3>
+    </StyledWordDiv>
+  );
   }
 }
 
