@@ -6,7 +6,7 @@ const Keybutton = styled.button`
   height: 60px;
   border: 3px solid #000;
   border-radius: 8px;
-  box-shadow: 0 9px #666;
+  box-shadow: 0 6px #666;
   font-size: 20px;
   font-weight: bold;
 

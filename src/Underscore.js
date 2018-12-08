@@ -4,6 +4,15 @@ import styled from 'styled-components';
 const StyledUnderscore = styled.div`
   border-bottom: 5px solid;
   width: 70px;
+  height: 55px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  span {
+    text-transform: uppercase;
+    font-size: 40px;
+  }
 `;
 
 class Underscore extends React.Component {
@@ -14,6 +23,7 @@ class Underscore extends React.Component {
       showLetter: false
     }
   }
+
 
 // makes sure once a letter is discovered it remains uncovered
   componentWillUpdate(nextProps, nextState) {
@@ -31,7 +41,7 @@ class Underscore extends React.Component {
   render() {
     return (
       <StyledUnderscore>
-        {(this.state.showLetter)?this.props.letter:''}
+        <span>{(this.state.showLetter)?this.props.letter:''}</span>
       </StyledUnderscore>
     );
   }

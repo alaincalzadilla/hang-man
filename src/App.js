@@ -3,6 +3,7 @@ import Word from './Word.js';
 import Keyboard from './Keyboard.js';
 import FailList from './FailsList.js';
 import styled from 'styled-components';
+import YouWon from './YouWon.js'
 
 const StyledApp = styled.div`
   display: grid;
@@ -62,13 +63,19 @@ class App extends Component {
   }
 
   render() {
+    console.log(this.state.youWon)
     return (
       <StyledApp className="App">
         <StyledHeader>
           <h1>hang man</h1>
         </StyledHeader>
 
-        <Keyboard keyClicked={this.keyClicked}/>
+        {(this.state.youWon)?
+          <YouWon>
+            <button onClick={this.resetState}>Replay</button>
+          </YouWon>
+          :
+          <Keyboard keyClicked={this.keyClicked}/>}
 
         <Word
         keyClicked={this.state.keyClicked}
@@ -76,9 +83,10 @@ class App extends Component {
         incrementGuesses={this.incrementGuesses}
         />
 
-        <FailList failList={this.state.failList} />
+        <FailList
+          failList={this.state.failList}
+         />
 
-      {(this.state.youWon) && <h1>you won</h1>}
       {(this.state.youLose) && <h1>you lose</h1>}
 
     </StyledApp>

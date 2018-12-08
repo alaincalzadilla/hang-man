@@ -35,6 +35,7 @@ class Word extends React.Component {
     }))
   }
 
+
 //returns an array of indexes where the character is found
   IsTheLetterHere(letter, word) {
     let indices = [];
@@ -56,16 +57,20 @@ class Word extends React.Component {
   }
 
   componentWillUpdate(nextProps, nextState){
-    if(nextState.counterOfMatches === this.state.selectedWord.length && this.state.selectedWord.length) this.props.youWon()
+    if(nextState.counterOfMatches === this.state.selectedWord.length && this.state.selectedWord.length) {
+      this.props.youWon();
+    }
   }
 
   shouldComponentUpdate(nextProps, nextState) {
     if (this.props.keyClicked !== nextProps.keyClicked
-      && !  this.IsTheLetterHere(nextProps.keyClicked, nextState.selectedWord).length
+      && nextProps.keyClicked
+      && !this.IsTheLetterHere(nextProps.keyClicked, nextState.selectedWord).length
     ) {
         this.props.incrementGuesses()
         return false;
       }
+
 
     return true;
   }
@@ -84,6 +89,7 @@ class Word extends React.Component {
   }
 
   render() {
+    console.log(this.state)
     const keyClicked = this.props.keyClicked;
     const ocurrence=this.IsTheLetterHere((keyClicked?keyClicked:' '), this.state.selectedWord);
 console.log(this.state.selectedWord)
