@@ -8,10 +8,10 @@ const Stylediv = styled.div`
   justify-content: center;
 `;
 
-export default function YouWon(props) {
+export default function YouWonLose(props) {
   return (
     <Stylediv>
-      <h2>Well done!</h2>
+      <h2>{props.text}</h2>
       {props.children}
     </Stylediv>
   );

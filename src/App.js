@@ -3,7 +3,8 @@ import Word from './Word.js';
 import Keyboard from './Keyboard.js';
 import FailList from './FailsList.js';
 import styled from 'styled-components';
-import YouWon from './YouWon.js'
+import YouWonLose from './YouWonLose.js';
+import Button from './Button.js'
 
 const StyledApp = styled.div`
   display: grid;
@@ -84,9 +85,13 @@ class App extends Component {
         </StyledHeader>
 
         {(this.state.youWon)?
-          <YouWon>
-            <button onClick={this.resetState}>Replay</button>
-          </YouWon>
+          <YouWonLose text='Well done!'>
+            <Button name='replay' handleClick={this.resetState} />
+          </YouWonLose>
+          :(this.state.youLose)?
+          <YouWonLose text='You Lose!'>
+            <Button name='replay' handleClick={this.resetState} />
+          </YouWonLose>
           :
           <Keyboard keyClicked={this.keyClicked}/>}
 
@@ -101,8 +106,6 @@ class App extends Component {
           failList={this.state.failList}
           reset = {this.reset}
          />
-
-      {(this.state.youLose) && <h1>you lose</h1>}
 
     </StyledApp>
     );
