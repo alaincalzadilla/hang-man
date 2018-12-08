@@ -34,6 +34,9 @@ class Underscore extends React.Component {
       this.props.incrementCounterOnMatch();
       this.setState({showLetter: true})
     }
+
+    if(nextProps.reset)
+      this.setState({show: false})
   }
 
 

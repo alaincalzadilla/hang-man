@@ -37,8 +37,12 @@ class App extends Component {
       failList: []
     }
 
+    this.defaultState = this.state;
+    this.reset = false;
+
     this.maxAmountOfGuesses = 6;
 
+    this.resetState = this.resetState.bind(this);
     this.keyClicked = this.keyClicked.bind(this);
     this.youWon = this.youWon.bind(this);
     this.incrementGuesses = this.incrementGuesses.bind(this);
@@ -58,8 +62,17 @@ class App extends Component {
       }))
   }
 
+  resetState(){
+    this.reset = true;
+    this.setState(this.defaultState);
+  }
+
   youWon() {
     if (!this.state.youWon) this.setState({youWon: true})
+  }
+
+  componentDidUpdate(){
+    this.reset = false
   }
 
   render() {
@@ -81,10 +94,12 @@ class App extends Component {
         keyClicked={this.state.keyClicked}
         youWon={this.youWon}
         incrementGuesses={this.incrementGuesses}
+        reset = {this.reset}
         />
 
         <FailList
           failList={this.state.failList}
+          reset = {this.reset}
          />
 
       {(this.state.youLose) && <h1>you lose</h1>}

@@ -22,6 +22,11 @@ class Word extends React.Component {
       counterOfMatches: 0
     }
 
+    this.defaultState = {
+      selectedWord: '',
+      counterOfMatches: 0
+    }
+
     this.IsTheLetterHere = this.IsTheLetterHere.bind(this);
     this.SelectWord = this.SelectWord.bind(this);
     this.incrementCounterOnMatch = this.incrementCounterOnMatch.bind(this);
@@ -57,8 +62,12 @@ class Word extends React.Component {
   }
 
   componentWillUpdate(nextProps, nextState){
-    if(nextState.counterOfMatches === this.state.selectedWord.length && this.state.selectedWord.length) {
-      this.props.youWon();
+    if(nextProps.reset && nextProps !== this.props)
+      this.setState(this.defaultState, this.SelectWord);
+    else {
+      if(nextState.counterOfMatches === this.state.selectedWord.length && this.state.selectedWord.length) {
+        this.props.youWon();
+      }
     }
   }
 
@@ -101,6 +110,7 @@ console.log(this.state.selectedWord)
                         letter={letter}
                         show={~ocurrence.indexOf(idx)}
                         incrementCounterOnMatch={this.incrementCounterOnMatch}
+                        reset={this.props.reset}
                      />
             }
           )}
