@@ -4,7 +4,9 @@ import Keyboard from './Keyboard.js';
 import FailList from './FailsList.js';
 import styled from 'styled-components';
 import YouWonLose from './YouWonLose.js';
-import Button from './Button.js'
+import Button from './Button.js';
+import Diagram from './Diagram.js';
+import './App.css';
 
 const StyledApp = styled.div`
   display: grid;
@@ -107,6 +109,7 @@ class App extends Component {
           reset = {this.reset}
          />
 
+       <Diagram guesses={this.state.guesses} />
     </StyledApp>
     );
   }
