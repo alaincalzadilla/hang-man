@@ -10,12 +10,14 @@ import './App.css';
 
 const StyledApp = styled.div`
   display: grid;
-  grid-template-rows: 100px 1fr 3fr 3fr;
-  grid-template-columns: 3fr 1fr;
-  grid-row-gap: 40px;
+  grid-template-rows: 80px 1fr 3fr 300px;
+  grid-template-columns: 2fr 1fr;
+  grid-row-gap: 10px;
   max-width: 960px;
   margin: auto;
   height: 100vh;
+  justify-content: center;
+  margin: auto;
 `;
 
 const StyledHeader = styled.header`

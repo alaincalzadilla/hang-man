@@ -4,9 +4,14 @@ import styled from 'styled-components';
 const StyledFail = styled.div`
   display: grid;
   grid-gap: 10px;
+  grid-template-columns: repeat(6, 1fr);
+  align-content: center;
+  justify-content: center;
+  margin: auto;
 
   h2{
     text-transform: uppercase;
+    grid-column: 1/-1;
   }
 `;
 

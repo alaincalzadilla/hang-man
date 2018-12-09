@@ -6,6 +6,7 @@ const Stylediv = styled.div`
   grid-row: 3/4;
   grid-column: 1/-1;
   justify-content: center;
+  align-content: center;
 `;
 
 export default function YouWonLose(props) {
