@@ -97,7 +97,7 @@ class App extends Component {
             <Button name='replay' handleClick={this.resetState} />
           </YouWonLose>
           :(this.state.youLose)?
-          <YouWonLose text='You Lose!'>
+          <YouWonLose text='You Lost!'>
             <Button name='replay' handleClick={this.resetState} />
           </YouWonLose>
           :
