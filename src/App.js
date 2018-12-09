@@ -27,6 +27,10 @@ const StyledHeader = styled.header`
   justify-content: center;
   h1 {
     text-transform: uppercase;
+
+    span {
+      color: red;
+    }
   }
 `;
 
@@ -85,7 +89,7 @@ class App extends Component {
     return (
       <StyledApp className="App">
         <StyledHeader>
-          <h1>hang man</h1>
+          <h1>hang{(this.state.youLose)&&<span>ed</span>} man</h1>
         </StyledHeader>
 
         {(this.state.youWon)?
