@@ -12,6 +12,10 @@ const StyledFail = styled.div`
   h2{
     text-transform: uppercase;
     grid-column: 1/-1;
+
+    span {
+      color: red;
+    }
   }
 `;
 
@@ -39,7 +43,7 @@ export default function FailsList(props) {
 
   return (
     <StyledFail>
-      <h2> fails</h2>
+      <h2> Remaining Guesses: <span>{6 - props.failList.length}</span></h2>
       {maxFails.map((slot, idx) =>
         <StyledSlot key={idx}>
           <p>{(props.failList[idx]) && props.failList[idx]}</p>
