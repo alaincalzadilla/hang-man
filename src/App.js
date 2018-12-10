@@ -50,6 +50,7 @@ class App extends Component {
       guesses: 0,
       failList: [],
       difficulty: '',
+      wordLoaded: false,
       intro: true
     }
 
@@ -59,11 +60,13 @@ class App extends Component {
       youLose: false,
       guesses: 0,
       failList: [],
+      wordLoaded: false
     };
     this.reset = false;
 
     this.maxAmountOfGuesses = 6;
 
+    this.wordLoaded = this.wordLoaded.bind(this);
     this.startTheGame = this.startTheGame.bind(this);
     this.changeDifficultyLevel = this.changeDifficultyLevel.bind(this);
     this.resetState = this.resetState.bind(this);
@@ -93,6 +96,10 @@ class App extends Component {
   startTheGame(){
     this.setState(prev => ({intro: !prev.intro}))
     this.resetState();
+  }
+
+  wordLoaded(boolean){
+    this.setState({wordLoaded: boolean})
   }
 
   resetState(){
@@ -142,7 +149,7 @@ class App extends Component {
 
             </YouWonLose>
               :
-              <Keyboard keyClicked={this.keyClicked}/>}
+              <Keyboard keyClicked={this.keyClicked} wordLoaded={this.state.wordLoaded}/>}
 
             <Word
             keyClicked={this.state.keyClicked}
@@ -150,6 +157,7 @@ class App extends Component {
             incrementGuesses={this.incrementGuesses}
             reset = {this.reset}
             difficulty = {this.state.difficulty}
+            wordLoaded = {this.wordLoaded}
             />
 
             <FailList

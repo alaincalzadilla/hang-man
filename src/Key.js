@@ -36,7 +36,7 @@ class Key extends React.Component {
 
   render() {
     return (
-      <Keybutton disabled={this.state.used} onClick={() => {this.handleKey(this.props.letter)}}>
+      <Keybutton disabled={this.state.used || !this.props.wordLoaded} onClick={() => {this.handleKey(this.props.letter)}}>
         {this.props.letter}
       </Keybutton>
     );

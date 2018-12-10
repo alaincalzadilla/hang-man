@@ -23,6 +23,7 @@ export default function Keyboard(props){
                               key={letter}
                               letter={letter}
                               keyClicked={props.keyClicked}
+                              wordLoaded={props.wordLoaded}
                               >
                                 {letter}
                               </Key>)}

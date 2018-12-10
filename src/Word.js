@@ -34,6 +34,7 @@ class Word extends React.Component {
   }
 // this function is called everytime we need to generate a new word
   SelectWord() {
+    this.props.wordLoaded(true);
     //generates a random index to pull a word from the words array
     const randomNumber = Math.floor(Math.random() * (this.state.words.length + 1));
     this.setState(prev => ({
