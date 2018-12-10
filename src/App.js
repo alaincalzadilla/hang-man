@@ -22,6 +22,28 @@ const StyledApp = styled.div`
 `;
 
 const StyledIntroDiv = styled.div`
+  grid-row: 2/4;
+  grid-column: 1/-1;
+  display: grid;
+  justify-content: center;
+  align-content: center;
+  grid-gap: 20px;
+  grid-template-columns: 2fr 1fr;
+  justify-items: center;
+  align-items: center;
+  border: 3px solid #000;
+  border-radius: 5px;
+
+  button {
+    border: 1px solid #000;
+    border-radius: 5px;
+    padding: 5px;
+
+    :hover {
+      background: black;
+      color: white;
+    }
+  }
 
 `;
 

@@ -1,4 +1,32 @@
 import React from 'react';
+import styled from 'styled-components';
+
+const StyledDiv = styled.div`
+  display: grid;
+  grid-template-columns: 1fr 50px 1fr;
+  grid-gap: 20px;
+  justify-content: center;
+  border: 3px solid #000;
+  border-radius: 5px;
+  padding: 20px;
+  justify-items: center;
+  align-items: center;
+
+  p {
+    grid-column: 1/-1;
+    margin: 0;
+  }
+
+  button {
+    border: 1px solid #000;
+    border-radius: 5px;
+
+    :hover {
+      background: black;
+      color: white;
+    }
+  }
+`;
 
 class Level extends React.Component{
   constructor(props) {
@@ -31,12 +59,12 @@ class Level extends React.Component{
 
   render() {
     return (
-      <div>
+      <StyledDiv>
         <p>Difficulty</p>
         <button onClick={this.decreaseQuantity}> - </button>
         <span>{(!this.state.quantity)?'random':this.state.quantity}</span>
         <button onClick={this.increaseQuantity}> + </button>
-      </div>
+      </StyledDiv>
     );
   }
 }
