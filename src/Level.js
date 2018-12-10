@@ -16,13 +16,13 @@ class Level extends React.Component{
   decreaseQuantity() {
       this.setState(prev => (
         (prev.quantity > 0)?{quantity: prev.quantity - 1}:{quantity: prev.quantity}
-      ), this.props.changeDifficultyLevel(this.state.quantity))
+      ), () => this.props.changeDifficultyLevel(this.state.quantity))
   }
 
   increaseQuantity() {
       this.setState(prev => (
         (prev.quantity < this.props.maxDifficulty)?{quantity: prev.quantity + 1}:{quantity: prev.quantity}
-      ), this.props.changeDifficultyLevel(this.state.quantity))
+      ), () => this.props.changeDifficultyLevel(this.state.quantity))
   }
 
   shouldComponentUpdate(nextProps, nextState){

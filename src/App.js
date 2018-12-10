@@ -21,6 +21,10 @@ const StyledApp = styled.div`
   margin: auto;
 `;
 
+const StyledIntroDiv = styled.div`
+
+`;
+
 const StyledHeader = styled.header`
   margin: auto;
   grid-column: 1/-1;
@@ -45,14 +49,22 @@ class App extends Component {
       youLose: false,
       guesses: 0,
       failList: [],
-      difficulty: ''
+      difficulty: '',
+      intro: true
     }
 
-    this.defaultState = this.state;
+    this.defaultState = {
+      keyClicked: '',
+      youWon: false,
+      youLose: false,
+      guesses: 0,
+      failList: [],
+    };
     this.reset = false;
 
     this.maxAmountOfGuesses = 6;
 
+    this.startTheGame = this.startTheGame.bind(this);
     this.changeDifficultyLevel = this.changeDifficultyLevel.bind(this);
     this.resetState = this.resetState.bind(this);
     this.keyClicked = this.keyClicked.bind(this);
@@ -78,6 +90,11 @@ class App extends Component {
     this.setState(() => (level)?{difficulty: level}:'')
   }
 
+  startTheGame(){
+    this.setState(prev => ({intro: !prev.intro}))
+    this.resetState();
+  }
+
   resetState(){
     this.reset = true;
     this.setState(this.defaultState);
@@ -99,35 +116,55 @@ class App extends Component {
           <h1>hang{(this.state.youLose)&&<span>ed</span>} man</h1>
         </StyledHeader>
 
-        {(this.state.youWon)?
-          <YouWonLose text='Well done!'>
-            <Button name='replay' handleClick={this.resetState} />
-          </YouWonLose>
-          :(this.state.youLose)?
-          <YouWonLose text='You Lost!'>
-            <Button name='replay' handleClick={this.resetState} />
-          </YouWonLose>
-          :
-          <Keyboard keyClicked={this.keyClicked}/>}
+        {(this.state.intro)?
+        <StyledIntroDiv>
+          <Level
+             maxDifficulty={10}
+             changeDifficultyLevel = {this.changeDifficultyLevel}
+           />
 
-        <Word
-        keyClicked={this.state.keyClicked}
-        youWon={this.youWon}
-        incrementGuesses={this.incrementGuesses}
-        reset = {this.reset}
-        difficulty = {this.state.difficulty}
-        />
+         <Button name="start" handleClick={this.startTheGame} />
+         </StyledIntroDiv>
+        :(
+          <React.Fragment>
+            {(this.state.youWon)?
+              <YouWonLose text='Well done!'>
+                <Button name='replay' handleClick={this.resetState} />
 
-        <FailList
-          failList={this.state.failList}
-          reset = {this.reset}
-         />
+                <Button name="settings" handleClick={this.startTheGame} />
 
-       <Level
-          maxDifficulty={10}
-          changeDifficultyLevel = {this.changeDifficultyLevel} />
+              </YouWonLose>
+              :(this.state.youLose)?
+              <YouWonLose text='You Lost!'>
+                <Button name='replay' handleClick={this.resetState} />
 
-       <Diagram guesses={this.state.guesses} />
+                <Button name="settings" handleClick={this.startTheGame} />
+
+            </YouWonLose>
+              :
+              <Keyboard keyClicked={this.keyClicked}/>}
+
+            <Word
+            keyClicked={this.state.keyClicked}
+            youWon={this.youWon}
+            incrementGuesses={this.incrementGuesses}
+            reset = {this.reset}
+            difficulty = {this.state.difficulty}
+            />
+
+            <FailList
+              failList={this.state.failList}
+              reset = {this.reset}
+             />
+
+
+           <Diagram guesses={this.state.guesses} />
+          </React.Fragment>
+
+        )
+      }
+
+
     </StyledApp>
     );
   }
