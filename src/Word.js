@@ -94,9 +94,10 @@ class Word extends React.Component {
   shouldComponentUpdate(nextProps, nextState) {
     if (this.props.keyClicked !== nextProps.keyClicked
       && nextProps.keyClicked
-      && !this.IsTheLetterHere(nextProps.keyClicked, nextState.selectedWord).length
+      && (!this.IsTheLetterHere(nextProps.keyClicked, nextState.selectedWord).length
+      || this.props.wholeWord !== this.state.selectedWord)
     ) {
-        this.props.incrementGuesses()
+        this.props.incrementGuesses('str')
         return false;
       }
     return true;
@@ -118,7 +119,7 @@ console.log(this.state.selectedWord)
               return <Underscore
                         key={idx}
                         letter={letter}
-                        show={~ocurrence.indexOf(idx)}
+                        show={~ocurrence.indexOf(idx) || this.props.wholeWord === this.state.selectedWord}
                         incrementCounterOnMatch={this.incrementCounterOnMatch}
                         reset={this.props.reset}
                      />
