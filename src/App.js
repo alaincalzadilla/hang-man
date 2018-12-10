@@ -110,8 +110,9 @@ class App extends Component {
       this.setState({youLose: true})
 
       this.setState(prev => ({
-        guesses: ++prev.guesses,
-        failList: prev.failList.concat(str)
+        guesses: prev.guesses+1,
+        failList: prev.failList.concat(str),
+        wholeWord:''
       }))
   }
 

@@ -94,12 +94,21 @@ class Word extends React.Component {
   shouldComponentUpdate(nextProps, nextState) {
     if (this.props.keyClicked !== nextProps.keyClicked
       && nextProps.keyClicked
-      && (!this.IsTheLetterHere(nextProps.keyClicked, nextState.selectedWord).length
-      || this.props.wholeWord !== this.state.selectedWord)
+      && !this.IsTheLetterHere(nextProps.keyClicked, nextState.selectedWord).length
     ) {
-        this.props.incrementGuesses('str')
+        this.props.incrementGuesses()
         return false;
       }
+
+      console.log('fail')
+      console.log(this.props.wholeWord);
+      console.log( this.state.selectedWord);
+
+    if (nextProps.wholeWord
+        && nextProps.wholeWord !== this.state.selectedWord){
+          this.props.incrementGuesses('str')
+          return false;
+        }
     return true;
   }
 
