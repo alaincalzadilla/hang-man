@@ -27,6 +27,7 @@ class Word extends React.Component {
       counterOfMatches: 0
     }
 
+    this.fetchWordFromDictionaryAPI = this.fetchWordFromDictionaryAPI.bind(this);
     this.IsTheLetterHere = this.IsTheLetterHere.bind(this);
     this.SelectWord = this.SelectWord.bind(this);
     this.incrementCounterOnMatch = this.incrementCounterOnMatch.bind(this);
@@ -71,22 +72,9 @@ class Word extends React.Component {
     }
   }
 
-  shouldComponentUpdate(nextProps, nextState) {
-    if (this.props.keyClicked !== nextProps.keyClicked
-      && nextProps.keyClicked
-      && !this.IsTheLetterHere(nextProps.keyClicked, nextState.selectedWord).length
-    ) {
-        this.props.incrementGuesses()
-        return false;
-      }
-
-
-    return true;
-  }
-
-  componentDidMount() {
-
-    const endPointUrl = "http://app.linkedin-reach.io/words?difficulty=1";
+  fetchWordFromDictionaryAPI(){
+    const URL = "http://app.linkedin-reach.io/words";
+    const endPointUrl = (this.props.difficulty)?URL.concat(`?difficulty=${this.props.difficulty}`):URL;
 
     fetch(endPointUrl, {
       method: "GET"
@@ -95,6 +83,26 @@ class Word extends React.Component {
     .then(text => {
       this.setState({words: text.split('\n')}, this.SelectWord)
     })
+  }
+
+  componentDidUpdate(prevProps){
+    (this.props.difficulty !== prevProps.difficulty) &&
+    this.fetchWordFromDictionaryAPI()
+  }
+
+  shouldComponentUpdate(nextProps, nextState) {
+    if (this.props.keyClicked !== nextProps.keyClicked
+      && nextProps.keyClicked
+      && !this.IsTheLetterHere(nextProps.keyClicked, nextState.selectedWord).length
+    ) {
+        this.props.incrementGuesses()
+        return false;
+      }
+    return true;
+  }
+
+  componentDidMount() {
+    this.fetchWordFromDictionaryAPI()
   }
 
   render() {

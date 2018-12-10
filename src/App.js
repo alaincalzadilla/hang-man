@@ -7,6 +7,7 @@ import YouWonLose from './YouWonLose.js';
 import Button from './Button.js';
 import Diagram from './Diagram.js';
 import './App.css';
+import Level from './Level.js';
 
 const StyledApp = styled.div`
   display: grid;
@@ -43,7 +44,8 @@ class App extends Component {
       youWon: false,
       youLose: false,
       guesses: 0,
-      failList: []
+      failList: [],
+      difficulty: ''
     }
 
     this.defaultState = this.state;
@@ -51,6 +53,7 @@ class App extends Component {
 
     this.maxAmountOfGuesses = 6;
 
+    this.changeDifficultyLevel = this.changeDifficultyLevel.bind(this);
     this.resetState = this.resetState.bind(this);
     this.keyClicked = this.keyClicked.bind(this);
     this.youWon = this.youWon.bind(this);
@@ -69,6 +72,10 @@ class App extends Component {
         guesses: ++prev.guesses,
         failList: prev.failList.concat(this.state.keyClicked)
       }))
+  }
+
+  changeDifficultyLevel(level){
+    this.setState(() => (level)?{difficulty: level}:'')
   }
 
   resetState(){
@@ -108,12 +115,17 @@ class App extends Component {
         youWon={this.youWon}
         incrementGuesses={this.incrementGuesses}
         reset = {this.reset}
+        difficulty = {this.state.difficulty}
         />
 
         <FailList
           failList={this.state.failList}
           reset = {this.reset}
          />
+
+       <Level
+          maxDifficulty={10}
+          changeDifficultyLevel = {this.changeDifficultyLevel} />
 
        <Diagram guesses={this.state.guesses} />
     </StyledApp>
