@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import AnimateSVG from './AnimateSVG.js';
 
 
 const StyledSVG = styled.svg`
@@ -22,88 +23,70 @@ export default function Diagram(props) {
        <line x1="0" x2="200" y1="250" y2="250" stroke="black" strokeWidth="5"/>
        <line x1="150" x2="150" y1="190" y2="220" stroke="orange" strokeWidth="5">
          {(props.guesses > 5) &&
-           <React.Fragment>
-             <animate
-                attributeName="y2" from="220" to="180"
-                dur="5s"
-                fill="freeze"
-              />
-              <animate
-                   attributeName="y1" from="190" to="150"
-                   dur="5s"
-                   fill="freeze"
-              />
-           </React.Fragment>
+
+           <AnimateSVG
+             attributeName1="y2"
+             from1="220"
+             to1="180"
+             attributeName2="y1"
+             from2="190"
+             to2="150"
+           />
+  
             }
        </line>
        <line x1="150" x2="130" y1="220" y2="250" stroke="orange" strokeWidth="5">
          {(props.guesses > 5) &&
 
-           <React.Fragment>
-             <animate
-                attributeName="y2" from="250" to="210"
-                dur="5s"
-                fill="freeze"
-              />
-              <animate
-                   attributeName="y1" from="220" to="180"
-                   dur="5s"
-                   fill="freeze"
-              />
-           </React.Fragment>
+           <AnimateSVG
+             attributeName1="y2"
+             from1="250"
+             to1="210"
+             attributeName2="y1"
+             from2="220"
+             to2="180"
+           />
 
             }
        </line>
        <line x1="150" x2="170" y1="220" y2="250" stroke="orange" strokeWidth="5">
          {(props.guesses > 5) &&
 
-           <React.Fragment>
-             <animate
-                attributeName="y2" from="250" to="210"
-                dur="5s"
-                fill="freeze"
-              />
-              <animate
-                   attributeName="y1" from="220" to="180"
-                   dur="5s"
-                   fill="freeze"
-              />
-           </React.Fragment>
-
+           <AnimateSVG
+             attributeName1="y2"
+             from1="250"
+             to1="210"
+             attributeName2="y1"
+             from2="220"
+             to2="180"
+           />
             }
        </line>
        <line x1="130" x2="170" y1="200" y2="200" stroke="orange" strokeWidth="5">
            {(props.guesses > 5) &&
-          <React.Fragment>
-            <animate
-               attributeName="y2" from="200" to="160"
-               dur="5s"
-               fill="freeze"
+
+             <AnimateSVG
+               attributeName1="y2"
+               from1="200"
+               to1="160"
+               attributeName2="y1"
+               from2="200"
+               to2="160"
              />
-             <animate
-                  attributeName="y1" from="200" to="160"
-                  dur="5s"
-                  fill="freeze"
-             />
-          </React.Fragment>
+
               }
        </line>
        <circle cx="150" cy="175" r="15" stroke="orange" fill="transparent" strokeWidth="5">
          {(props.guesses > 5) &&
 
-           <React.Fragment>
-             <animate
-                attributeName="cy" from="175" to="140"
-                dur="5s"
-                fill="freeze"
-              />
-              <animate
-                   attributeName="cx" from="150" to="135"
-                   dur="5s"
-                   fill="freeze"
-              />
-           </React.Fragment>
-
+           <AnimateSVG
+             attributeName1="cy"
+             from1="175"
+             to1="140"
+             attributeName2="cx"
+             from2="150"
+             to2="135"
+           />
             }
        </circle>
 
