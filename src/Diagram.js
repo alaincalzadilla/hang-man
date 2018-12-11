@@ -19,43 +19,89 @@ export default function Diagram(props) {
        )}
        <line x1="0" x2="200" y1="250" y2="250" stroke="black" strokeWidth="5"/>
        <line x1="150" x2="150" y1="190" y2="220" stroke="orange" strokeWidth="5">
-         {(props.guesses > 5) && <animate
-              attributeName="y2" from="220" to="180"
-              dur="5s"
-              fill="freeze"
+         {(props.guesses > 5) &&
+           <React.Fragment>
+             <animate
+                attributeName="y2" from="220" to="180"
+                dur="5s"
+                fill="freeze"
               />
+              <animate
+                   attributeName="y1" from="190" to="150"
+                   dur="5s"
+                   fill="freeze"
+              />
+           </React.Fragment>
             }
        </line>
        <line x1="150" x2="130" y1="220" y2="250" stroke="orange" strokeWidth="5">
-         {(props.guesses > 5) && <animate
-              attributeName="y2" from="250" to="210"
-              dur="5s"
-              fill="freeze"
+         {(props.guesses > 5) &&
+
+           <React.Fragment>
+             <animate
+                attributeName="y2" from="250" to="210"
+                dur="5s"
+                fill="freeze"
               />
+              <animate
+                   attributeName="y1" from="220" to="180"
+                   dur="5s"
+                   fill="freeze"
+              />
+           </React.Fragment>
+
             }
        </line>
        <line x1="150" x2="170" y1="220" y2="250" stroke="orange" strokeWidth="5">
-         {(props.guesses > 5) && <animate
-              attributeName="y2" from="250" to="210"
-              dur="5s"
-              fill="freeze"
+         {(props.guesses > 5) &&
+
+           <React.Fragment>
+             <animate
+                attributeName="y2" from="250" to="210"
+                dur="5s"
+                fill="freeze"
               />
+              <animate
+                   attributeName="y1" from="220" to="180"
+                   dur="5s"
+                   fill="freeze"
+              />
+           </React.Fragment>
+
             }
        </line>
        <line x1="130" x2="170" y1="200" y2="200" stroke="orange" strokeWidth="5">
-           {(props.guesses > 5) && <animate
-                attributeName="y2" from="200" to="160"
-                dur="5s"
-                fill="freeze"
-                />
+           {(props.guesses > 5) &&
+          <React.Fragment>
+            <animate
+               attributeName="y2" from="200" to="160"
+               dur="5s"
+               fill="freeze"
+             />
+             <animate
+                  attributeName="y1" from="200" to="160"
+                  dur="5s"
+                  fill="freeze"
+             />
+          </React.Fragment>
               }
        </line>
        <circle cx="150" cy="175" r="15" stroke="orange" fill="transparent" strokeWidth="5">
-         {(props.guesses > 5) && <animate
-              attributeName="cy" from="175" to="135"
-              dur="5s"
-              fill="freeze"
+         {(props.guesses > 5) &&
+
+           <React.Fragment>
+             <animate
+                attributeName="cy" from="175" to="140"
+                dur="5s"
+                fill="freeze"
               />
+              <animate
+                   attributeName="cx" from="150" to="135"
+                   dur="5s"
+                   fill="freeze"
+              />
+           </React.Fragment>
+
             }
        </circle>
 
@@ -66,12 +112,14 @@ export default function Diagram(props) {
 
        <line className={`hangerPath ${(props.guesses >= 5) && "hanger"}`} x1="150" x2="150" y1="80" y2="160" stroke="black" strokeWidth="2">
            {(props.guesses > 5) && <animate
-                attributeName="y2" from="160" to="120"
+                attributeName="y2" from="160" to="150"
                 dur="5s"
                 fill="freeze"
                 />
               }
        </line>
+
+       {(props.guesses > 5) && <circle cx="150" cy="152" r="4" stroke="black" strokeWidth="4" fill="transparent" />}
 
 
 
