@@ -6,7 +6,7 @@ const StyledDiv = styled.div`
   grid-template-columns: 1fr 50px 1fr;
   grid-gap: 20px;
   justify-content: center;
-  border: 3px solid #000;
+  border: 3px solid #666;
   border-radius: 5px;
   padding: 20px;
   justify-items: center;
@@ -24,6 +24,11 @@ const StyledDiv = styled.div`
     :hover {
       background: black;
       color: white;
+    }
+
+    [disabled] {
+      background: white !important;
+      color: white !important;
     }
   }
 `;

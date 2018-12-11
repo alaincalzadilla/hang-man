@@ -3,7 +3,16 @@ import styled from 'styled-components';
 import Button from './Button.js';
 
 const InputDiv = styled.div`
+ display: grid;
+ grid-template-columns: 3fr 1fr;
+ padding: 20px;
+ border: 3px solid #666;
+ border-radius: 5px;
+ grid-gap: 10px;
 
+ input {
+   border: 0;
+ }
 `;
 
 class WholeWord extends React.Component{
@@ -31,12 +40,12 @@ class WholeWord extends React.Component{
     return (
       <InputDiv>
         <input
-         placeholder="I know the word"
+         placeholder={this.props.placeholder}
          value={this.state.query}
          onChange={e => this.handleInput(e.target.value)}
          />
 
-         <Button name={this.props.name} handleClick={this.inputWholeWord} />
+         <Button disabled={!this.state.query} name={this.props.name} handleClick={this.inputWholeWord} />
 
       </InputDiv>
     );

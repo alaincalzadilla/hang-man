@@ -30,21 +30,26 @@ const StyledIntroDiv = styled.div`
   justify-content: center;
   align-content: center;
   grid-gap: 20px;
-  grid-template-columns: 2fr 1fr;
+  grid-template-columns: 2fr 2fr 1fr;
   justify-items: center;
   align-items: center;
-  border: 3px solid #000;
   border-radius: 5px;
 
+  h2 {
+    grid-column: 1/-1;
+  }
+
   button {
-    border: 1px solid #000;
+    border: 1px solid #fff;
     border-radius: 5px;
     padding: 5px;
+    color: #000;
 
-    :hover {
-      background: black;
+    :hover:enabled {
+      background: #666;
       color: white;
     }
+
   }
 
 `;
@@ -58,7 +63,7 @@ const StyledHeader = styled.header`
     text-transform: uppercase;
 
     span {
-      color: red;
+      color: #666;
     }
   }
 `;
@@ -173,7 +178,6 @@ class App extends Component {
   }
 
   render() {
-    console.log(this.state.youWon)
     return (
       <StyledApp className="App">
         <StyledHeader>
@@ -182,17 +186,22 @@ class App extends Component {
 
         {(this.state.intro)?
         <StyledIntroDiv>
+          <h2>Welcome! Please enter your name and select difficulty level</h2>
+
+          {(!this.state.name)? <WholeWord
+              inputWholeWord={this.getPlayer}
+              name='Enter'
+              placeholder='Enter your name'
+              />
+            : <Button name="Not me" handleClick={() => this.setState({name:''})} />
+          }
+
           <Level
              maxDifficulty={10}
              changeDifficultyLevel = {this.changeDifficultyLevel}
            />
 
-         {(!this.state.name)? <WholeWord
-             inputWholeWord={this.getPlayer}
-             name='Enter'
-             />
-           : <Button name="Not me" handleClick={() => this.setState({name:''})} />
-         }
+
 
          <Button disabled={(!this.state.name)?'disabled':''} name="start" handleClick={this.startTheGame} />
          </StyledIntroDiv>
@@ -219,6 +228,7 @@ class App extends Component {
                   <WholeWord
                     inputWholeWord={this.inputWholeWord}
                     name='Check'
+                    placeholder='I know the word!'
                     />
                 </React.Fragment>
               )}
