@@ -5,6 +5,8 @@ import styled from 'styled-components';
 const StyledSVG = styled.svg`
   height: 300px;
   width: 200px;
+  grid-row: -3/-1;
+  grid-column: -2/-1;
 `;
 
 export default function Diagram(props) {

@@ -8,6 +8,7 @@ const StyledFail = styled.div`
   align-content: center;
   justify-content: center;
   margin: auto;
+  grid-column: 1/2;
 
   h2{
     text-transform: uppercase;
@@ -21,7 +22,7 @@ const StyledFail = styled.div`
 
 
 const StyledSlot = styled.div`
-  background-color: red;
+  background-color: #f1f1f1;
   border-radius: 50%;
   height: 50px;
   width: 50px;
@@ -30,7 +31,7 @@ const StyledSlot = styled.div`
   justify-content: center;
 
   p {
-    color: #fff;
+    color: red;
     font-size: 30px;
     margin: 0;
   }

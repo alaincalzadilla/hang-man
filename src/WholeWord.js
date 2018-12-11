@@ -9,6 +9,9 @@ const InputDiv = styled.div`
  border: 3px solid #666;
  border-radius: 5px;
  grid-gap: 10px;
+ align-self: center;
+ justify-self: center;
+
 
  input {
    border: 0;

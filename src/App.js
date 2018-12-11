@@ -13,9 +13,9 @@ import Points from './Points.js';
 
 const StyledApp = styled.div`
   display: grid;
-  grid-template-rows: 70px 1fr 3fr 1fr 300px;
+  grid-template-rows: 70px 1fr 3fr 1fr 200px;
   grid-template-columns: 2fr 1fr;
-  grid-row-gap: 10px;
+  grid-row-gap: 20px;
   max-width: 960px;
   margin: auto;
   height: 100vh;
