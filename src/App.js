@@ -75,6 +75,8 @@ class App extends Component {
       failList: [],
       difficulty: '',
       wordLoaded: false,
+      name: '',
+      longestStreak: 0,
       intro: true
     }
 
@@ -91,6 +93,7 @@ class App extends Component {
 
     this.maxAmountOfGuesses = 6;
 
+    this.getPlayer = this.getPlayer.bind(this);
     this.inputWholeWord = this.inputWholeWord.bind(this);
     this.wordLoaded = this.wordLoaded.bind(this);
     this.startTheGame = this.startTheGame.bind(this);
@@ -107,7 +110,10 @@ class App extends Component {
 
   incrementGuesses(str=this.state.keyClicked){
     if(this.state.guesses+1 === this.maxAmountOfGuesses)
-      this.setState({youLose: true})
+      this.setState({
+        youLose: true,
+        longestStreak: 0
+      })
 
       this.setState(prev => ({
         guesses: prev.guesses+1,
@@ -121,7 +127,9 @@ class App extends Component {
   }
 
   startTheGame(){
-    this.setState(prev => ({intro: !prev.intro}))
+    this.setState(prev => ({
+      intro: !prev.intro
+    }))
     this.resetState();
   }
 
@@ -139,7 +147,18 @@ class App extends Component {
   }
 
   youWon() {
-    if (!this.state.youWon) this.setState({youWon: true})
+    if (!this.state.youWon)
+    this.setState(prev => ({
+      youWon: true,
+      longestStreak: prev.longestStreak + 1
+    }))
+  }
+
+  getPlayer(name){
+    this.setState({
+      name,
+      longestStreak: 0
+    })
   }
 
   componentDidUpdate(){
@@ -161,7 +180,14 @@ class App extends Component {
              changeDifficultyLevel = {this.changeDifficultyLevel}
            />
 
-         <Button name="start" handleClick={this.startTheGame} />
+         {(!this.state.name)? <WholeWord
+             inputWholeWord={this.getPlayer}
+             name='Enter'
+             />
+           : <Button name="Not me" handleClick={() => this.setState({name:''})} />
+         }
+
+         <Button disabled={(!this.state.name)?'disabled':''} name="start" handleClick={this.startTheGame} />
          </StyledIntroDiv>
         :(
           <React.Fragment>
@@ -185,6 +211,7 @@ class App extends Component {
 
                   <WholeWord
                     inputWholeWord={this.inputWholeWord}
+                    name='Check'
                     />
                 </React.Fragment>
               )}

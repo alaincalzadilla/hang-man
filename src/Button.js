@@ -11,7 +11,7 @@ export default function Button(props) {
   }
 
   return (
-    <StyledButton onClick={handleClick}>
+    <StyledButton disabled={props.disabled} onClick={handleClick}>
       {props.name}
     </StyledButton>
   );

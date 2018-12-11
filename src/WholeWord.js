@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import Button from './Button.js';
 
 const InputDiv = styled.div`
 
@@ -35,9 +36,8 @@ class WholeWord extends React.Component{
          onChange={e => this.handleInput(e.target.value)}
          />
 
-         <button onClick={this.inputWholeWord}>
-          Check
-        </button>
+         <Button name={this.props.name} handleClick={this.inputWholeWord} />
+
       </InputDiv>
     );
   }

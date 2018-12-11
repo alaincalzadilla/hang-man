@@ -106,7 +106,7 @@ class Word extends React.Component {
 
     if (nextProps.wholeWord
         && nextProps.wholeWord !== this.state.selectedWord){
-          this.props.incrementGuesses('str')
+          this.props.incrementGuesses('FW')
           return false;
         }
     return true;
