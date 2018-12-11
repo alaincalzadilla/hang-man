@@ -109,11 +109,13 @@ class App extends Component {
     this.youWon = this.youWon.bind(this);
     this.incrementGuesses = this.incrementGuesses.bind(this);
   }
-
+//function gets called with every click on the Keyboard
+// this is the place where to implement keyboard input
   keyClicked(keyClicked) {
     this.setState({keyClicked})
   }
-
+// gets called with every fail, checks if the amount of fails reached
+// max allowed guesses and resets the longest streak
   incrementGuesses(str=this.state.keyClicked){
     if(this.state.guesses+1 === this.maxAmountOfGuesses)
       this.setState({
@@ -131,27 +133,30 @@ class App extends Component {
   changeDifficultyLevel(level){
     this.setState(() => (level)?{difficulty: level}:'')
   }
-
+//this function shows the intro modal so the user can change difficulty
+// without loosing progress
   startTheGame(){
     this.setState(prev => ({
       intro: !prev.intro
     }))
     this.resetState();
   }
-
+// the request to the API came back
   wordLoaded(boolean){
     this.setState({wordLoaded: boolean})
   }
-
+// this function resets the state but keeps settings and progress
+// this.defaultState doesn't include longestStreak, difficulty and name
   resetState(){
     this.reset = true;
     this.setState(this.defaultState);
   }
-
+// this gets passed down to the input box to check if the user
+// has typed the rigth word
   inputWholeWord(query){
     this.setState({wholeWord: query})
   }
-
+// adds 1 to the streak
   youWon() {
     if (!this.state.youWon)
     this.setState(prev => ({
@@ -159,7 +164,7 @@ class App extends Component {
       longestStreak: prev.longestStreak + 1
     }))
   }
-
+// captures the player's name and resets the streak
   getPlayer(name){
     this.setState({
       name,
@@ -170,7 +175,7 @@ class App extends Component {
   componentDidUpdate(){
     this.reset = false
   }
-
+// sets up the local storage for storing the leader
   componentDidMount(){
     if (typeof(Storage) !== "undefined"){
       (!localStorage.longestStreak) && (localStorage.longestStreak = 0)

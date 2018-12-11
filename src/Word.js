@@ -21,7 +21,8 @@ class Word extends React.Component {
       selectedWord: '',
       counterOfMatches: 0
     }
-
+// doesnt include words to avoid making another
+// API call
     this.defaultState = {
       selectedWord: '',
       counterOfMatches: 0
@@ -55,14 +56,14 @@ class Word extends React.Component {
 
     return indices
   }
-
+//this is to track if the user wins
   incrementCounterOnMatch() {
     this.setState(prev => ({
-        counterOfMatches: ++prev.counterOfMatches
+        counterOfMatches: prev.counterOfMatches+1
       })
     )
   }
-
+// decides if the player wins the game
   componentWillUpdate(nextProps, nextState){
     if(nextProps.reset && nextProps !== this.props)
       this.setState(this.defaultState, this.SelectWord);
@@ -85,12 +86,14 @@ class Word extends React.Component {
       this.setState({words: text.split('\n')}, this.SelectWord)
     })
   }
-
+// if the difficulty parameter is updated we need
+// to fetch again
   componentDidUpdate(prevProps){
     (this.props.difficulty !== prevProps.difficulty) &&
     this.fetchWordFromDictionaryAPI()
   }
-
+// this prevents the component from rendering if the
+  // clicked key is not a match
   shouldComponentUpdate(nextProps, nextState) {
     if (this.props.keyClicked !== nextProps.keyClicked
       && nextProps.keyClicked
@@ -99,10 +102,6 @@ class Word extends React.Component {
         this.props.incrementGuesses()
         return false;
       }
-
-      console.log('fail')
-      console.log(this.props.wholeWord);
-      console.log( this.state.selectedWord);
 
     if (nextProps.wholeWord
         && nextProps.wholeWord !== this.state.selectedWord){
@@ -117,10 +116,8 @@ class Word extends React.Component {
   }
 
   render() {
-    console.log(this.state)
     const keyClicked = this.props.keyClicked;
     const ocurrence=this.IsTheLetterHere((keyClicked?keyClicked:' '), this.state.selectedWord);
-console.log(this.state.selectedWord)
     return (this.state.selectedWord)?
       (
         <StyledWordDiv>

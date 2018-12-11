@@ -28,7 +28,8 @@ class Key extends React.Component {
       used: false
     }
   }
-
+// this is to disable the already clicked letter and calls setState on App
+// to update the keyClicked property on its state
   handleKey(keyPressed) {
     this.setState({used: true});
     this.props.keyClicked(keyPressed);

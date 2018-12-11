@@ -17,7 +17,7 @@ const InputDiv = styled.div`
    border: 0;
  }
 `;
-
+// this is just a regular input component
 class WholeWord extends React.Component{
   constructor (props){
     super(props);

@@ -27,32 +27,22 @@ class Underscore extends React.Component {
     }
   }
 
-
-
-
 // makes sure once a letter is discovered it remains uncovered
   componentWillUpdate(nextProps, nextState) {
 
     if (this.props.show !== nextProps.show && nextProps.show) {
-      console.log('will')
-
       this.props.incrementCounterOnMatch();
       this.setState({showLetter: true})
     }
 
     if(nextProps.reset)
       this.setState({show: false})
-
+// this is to showing the remaining letters when the
+// player loses the game
     if(this.props.showOnLoosing !== nextProps.showOnLoosing && nextProps.showOnLoosing){
-      console.log(nextProps.showOnLoosing);
-      console.log(this.props.letter);
       this.setState({showLetterOnLoosing:true})
     }
   }
-
-
-
-
 
   render() {
     return (
