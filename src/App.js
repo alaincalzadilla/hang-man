@@ -63,7 +63,7 @@ const StyledHeader = styled.header`
     text-transform: uppercase;
 
     span {
-      color: #666;
+      color: red;
     }
   }
 `;
@@ -241,6 +241,7 @@ class App extends Component {
             reset = {this.reset}
             difficulty = {this.state.difficulty}
             wordLoaded = {this.wordLoaded}
+            youLost={this.state.youLose}
             />
 
           <Points name={this.state.name} longestStreak={this.state.longestStreak}/>

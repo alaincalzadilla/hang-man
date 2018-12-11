@@ -8,21 +8,26 @@ const StyledUnderscore = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-
-  span {
-    text-transform: uppercase;
-    font-size: 40px;
-  }
 `;
+
+const StyledSpan = styled.span`
+  text-transform: uppercase;
+  font-size: 40px;
+  color: ${props => props.show ? 'black' : ((props.showLetterOnLoosing) && 'rgba(228, 16, 16, 0.47)')};
+`;
+
 
 class Underscore extends React.Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      showLetter: false
+      showLetter: false,
+      showLetterOnLoosing: false
     }
   }
+
+
 
 
 // makes sure once a letter is discovered it remains uncovered
@@ -37,14 +42,22 @@ class Underscore extends React.Component {
 
     if(nextProps.reset)
       this.setState({show: false})
+
+    if(this.props.showOnLoosing !== nextProps.showOnLoosing && nextProps.showOnLoosing){
+      console.log(nextProps.showOnLoosing);
+      console.log(this.props.letter);
+      this.setState({showLetterOnLoosing:true})
+    }
   }
+
+
 
 
 
   render() {
     return (
       <StyledUnderscore>
-        <span>{(this.state.showLetter)?this.props.letter:''}</span>
+        <StyledSpan show={this.state.showLetter} showLetterOnLoosing={this.state.showLetterOnLoosing}>{(this.state.showLetter || this.state.showLetterOnLoosing)?this.props.letter:''}</StyledSpan>
       </StyledUnderscore>
     );
   }

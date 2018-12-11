@@ -129,6 +129,7 @@ console.log(this.state.selectedWord)
                         key={idx}
                         letter={letter}
                         show={~ocurrence.indexOf(idx) || this.props.wholeWord === this.state.selectedWord}
+                        showOnLoosing={this.props.youLost}
                         incrementCounterOnMatch={this.incrementCounterOnMatch}
                         reset={this.props.reset}
                      />
