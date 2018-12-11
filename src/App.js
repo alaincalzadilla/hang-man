@@ -8,7 +8,8 @@ import Button from './Button.js';
 import Diagram from './Diagram.js';
 import './App.css';
 import Level from './Level.js';
-import WholeWord from './WholeWord.js'
+import WholeWord from './WholeWord.js';
+import Points from './Points.js';
 
 const StyledApp = styled.div`
   display: grid;
@@ -165,6 +166,12 @@ class App extends Component {
     this.reset = false
   }
 
+  componentDidMount(){
+    if (typeof(Storage) !== "undefined"){
+      (!localStorage.longestStreak) && (localStorage.longestStreak = 0)
+    }
+  }
+
   render() {
     console.log(this.state.youWon)
     return (
@@ -225,6 +232,8 @@ class App extends Component {
             difficulty = {this.state.difficulty}
             wordLoaded = {this.wordLoaded}
             />
+
+          <Points name={this.state.name} longestStreak={this.state.longestStreak}/>
 
 
 

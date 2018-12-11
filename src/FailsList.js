@@ -46,7 +46,7 @@ export default function FailsList(props) {
       <h2> Remaining Guesses: <span>{6 - props.failList.length}</span></h2>
       {maxFails.map((slot, idx) =>
         <StyledSlot key={idx}>
-          <p>{(props.failList[idx]) && props.failList[idx]}</p>
+          {(props.failList[idx]) && <p> {props.failList[idx]}</p>}
         </StyledSlot>
       )}
     </StyledFail>
